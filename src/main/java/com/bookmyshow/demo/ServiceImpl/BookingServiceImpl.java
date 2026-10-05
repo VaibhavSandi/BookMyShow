@@ -1,4 +1,8 @@
 package com.bookmyshow.demo.ServiceImpl;
 
-public class BookingServiceImpl {
+import com.bookmyshow.demo.Service.BookingService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class BookingServiceImpl implements BookingService {
 }

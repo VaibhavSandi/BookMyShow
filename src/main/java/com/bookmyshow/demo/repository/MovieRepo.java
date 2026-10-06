@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface MovieRepo  extends JpaRepository<Movie,Long> {
 
 
-    List<Movie> findByActiveTrueOrderByTitle();
+    List<Movie> findByActivateTrueOrderByTitle();
     Optional<Movie> findByTitle(String title);
 
 }

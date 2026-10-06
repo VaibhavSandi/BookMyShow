@@ -10,9 +10,24 @@ import java.util.Optional;
 
 public interface ShowSeatRepo  extends JpaRepository<ShowSeat,Long> {
 
-    @Query("select s.seatLabel from ShowSeat where s.showid=:showId and s.reserved=false order by s.id")
-    List<String> findAvailbleLabels(@Param("showId") Long showId);
+@Query("""
+    SELECT s.SeatLabel
+    FROM ShowSeat s
+    WHERE s.show.id = :showId
+      AND s.reserved = false
+    ORDER BY s.id
+    """)
+List<String> findAvailableLabels(@Param("showId") Long showId);
 
-    @Query("select s from ShowSeat s where s.showid=:showId and s.seatLabel in labels")
-    List<ShowSeat> findForUpdate(@Param("showId") Long showId,@Param("labels") List<String> labels);
+
+@Query("""
+    SELECT s
+    FROM ShowSeat s
+    WHERE s.show.id = :showId
+      AND s.SeatLabel IN :labels
+    """)
+List<ShowSeat> findForUpdate(
+        @Param("showId") Long showId,
+        @Param("labels") List<String> labels
+);
 }

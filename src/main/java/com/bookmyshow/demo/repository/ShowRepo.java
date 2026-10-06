@@ -11,18 +11,18 @@ import java.util.Optional;
 
 public interface ShowRepo  extends JpaRepository <Show,Long> {
 
-    boolean existByMovieIdandTheatreIdAndStartAt(Long movieId, Long TheratreId, LocalDateTime stratAt);
+    boolean existsByMovieIdAndTheatreIdAndStratsAt(Long movieId, Long TheratreId, LocalDateTime stratAt);
     @Query("""
     SELECT s
     FROM Show s
     JOIN FETCH s.movie m
     JOIN FETCH s.theatre t
     WHERE s.active = true
-      AND m.active = true
+      AND m.activate = true
       AND t.city = :city
-      AND s.startAt >= :from
-      AND s.startAt < :to
-    ORDER BY s.startAt
+      AND s.stratsAt >= :from
+      AND s.stratsAt < :to
+    ORDER BY s.stratsAt
     """)
     List<Show> findActiveShows(
             @Param("city") String city,

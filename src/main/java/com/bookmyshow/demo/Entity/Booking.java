@@ -142,4 +142,10 @@ public class Booking {
     )
     @Column(name="seat_label",nullable = false)
     public List<String> seatLabel=new ArrayList<>();
+
+
+    public void cancel()
+    {
+        this.status=BookingStatus.CANCELLED;
+    }
 }
